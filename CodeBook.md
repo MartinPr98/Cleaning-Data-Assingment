@@ -12,15 +12,15 @@ x_train = reads the .txt file "x_train" in a specified folder "train_path" using
 y_train = reads the .txt file "y_train" in a specified folder "train_path" using functioon read.table
 
 ##### Test Data
-subject_test = reads the .txt file "subject_train" in a specified folder "train_path" using functioon read.table
+subject_test = reads the .txt file "subject_test" in a specified folder "train_path" using functioon read.table
 x_test = reads the .txt file "x_test" in a specified folder "test_path" using functioon read.table
 y_test = reads the .txt file "y_test" in a specified folder "test_path" using functioon read.table
 
-# Reading the features names
-feature_names <- read.table(file.path(feature_names, "features.txt"))[, 2]
+##### Feature Names
+feature_names = reads the .txt file "features" in a specified folder "feature_names" using functioon read.table
 
-# Reading the activity labels file, so I can left join in later for descriptive names to Activity 1-6
-activity_names <- read.table(file.path(activity_labels, "activity_labels.txt"), header = FALSE, col.names = c("Activity", "Activity_names"))
+##### Activity Labels
+activity_names = reads the .txt file "activity_labels" in a specified folder "activity_labels" using functioon read.table. Beacuse default .txt file does not have the heades for the columns, I added them separately --> "Activity" and "Activity_names"
 
 # Merging the columns for both datasets
 train_data <- cbind(subject_train, y_train, x_train)
