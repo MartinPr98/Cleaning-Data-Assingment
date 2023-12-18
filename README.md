@@ -8,7 +8,7 @@ test_path <- "/home/rstudio/Cleaning Data Assingement/UCI HAR Dataset/test"
 feature_names <- "/home/rstudio/Cleaning Data Assingement/UCI HAR Dataset"
 activity_labels <- "/home/rstudio/Cleaning Data Assingement/UCI HAR Dataset"
 
-####Then I read all the necessary files/data
+#### Then I read all the necessary files/data
 
 ######Reading the test data
 subject_train <- read.table(file.path(train_path, "subject_train.txt"))
