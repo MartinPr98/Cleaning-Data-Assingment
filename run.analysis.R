@@ -49,3 +49,6 @@ columns_to_average <- names(mean_std_data)[3:81]
 average_data <- mean_std_data %>%
   group_by(Subject, Activity) %>%
   summarise(across(all_of(columns_to_average), mean, na.rm = TRUE))
+
+# Creating the text file of a Tidy Dataset
+write.table(tidy_dataset, "tidy_data.txt", row.names = FALSE)
