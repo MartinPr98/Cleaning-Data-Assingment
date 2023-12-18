@@ -1,17 +1,17 @@
 ### This Code book describes all the variables, the data, and any transformations or work that was performed during the analysis
 
-### Working Directories
+#### Working Directories
 train_path = path to the folder, where the train data are located
 test_path = path to the folder, where the test data are located
 feature_names = path to folder, where the feature_names data are located
 activity_labels = path to folder, where the activity_labels data are located
 
-### Train Data
+#### Train Data
 subject_train = reads the .txt file "subject_train" in a specified folder "train_path" using functioon read.table
 x_train = reads the .txt file "x_train" in a specified folder "train_path" using functioon read.table
 y_train = reads the .txt file "y_train" in a specified folder "train_path" using functioon read.table
 
-### Test Data
+#### Test Data
 subject_test = reads the .txt file "subject_train" in a specified folder "train_path" using functioon read.table
 x_test = reads the .txt file "x_test" in a specified folder "test_path" using functioon read.table
 y_test = reads the .txt file "y_test" in a specified folder "test_path" using functioon read.table
