@@ -10,7 +10,7 @@ activity_labels <- "/home/rstudio/Cleaning Data Assingement/UCI HAR Dataset"
 
 #### Then I read all the necessary files/data
 
-######Reading the test data
+###### Reading the test data
 subject_train <- read.table(file.path(train_path, "subject_train.txt"))
 x_train <- read.table(file.path(train_path, "X_train.txt"))
 y_train <- read.table(file.path(train_path, "y_train.txt"))
