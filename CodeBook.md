@@ -1,4 +1,4 @@
-# This Code book describes all the variables, the data, and any transformations or work that was performed during the analysis
+## This Code book describes all the variables, the data, and any transformations or work that was performed during the analysis
 
 ### Working Directories
 train_path = path to the folder, where the train data are located
