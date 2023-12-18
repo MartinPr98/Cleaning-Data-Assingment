@@ -22,16 +22,16 @@ feature_names = reads the .txt file "features" in a specified folder "feature_na
 ##### Activity Labels
 activity_names = reads the .txt file "activity_labels" in a specified folder "activity_labels" using functioon read.table. Beacuse default .txt file does not have the heades for the columns, I added them separately --> "Activity" and "Activity_names"
 
-# Merging the columns for both datasets
-train_data <- cbind(subject_train, y_train, x_train)
-test_data <- cbind(subject_test, y_test, x_test)
+##### Merging 
+train_data = combines all the files for train data that which was read before with function "cbind" (column wise)
+test_data  = combines all the files for test data that which was read before with function "cbind" (column wise)
 
-# Merging the train and test datasets
-merged_data <- rbind(train_data, test_data)
-colnames(merged_data) <- c("Subject", "Activity", feature_names)
-mean_std_data <- merged_data[, grep("mean|std|Subject|Activity", names(merged_data))]
+##### Combining datasets
+merged_data = includes train and test data, merging those two datasets row wise with function "rbind" 
+colnames(merged_data) = Naming the columns in dataset merged_data ("Subject", "Activity", feature_names)
+mean_std_data = extracting only columns containing mean and standard deviation
 
-# Replacing numbers with descriptive categories in column "Activity"
+##### Replacing numbers with category names
 installed.packages("dplyr")
 library(dplyr)
 mean_std_data <- mean_std_data %>%
@@ -44,11 +44,9 @@ mean_std_data <- mean_std_data %>%
     Activity == 6 ~ "LAYING")
   )
 
-# Selecting only columns that I want to calculate the mean for
-columns_to_average <- names(mean_std_data)[3:81]
+###### Selecting columns for mean calculation
+columns_to_average = extracts columns 3:81, so the calculation of mean works
 
-# Creating a subset average_data that calculates the mean for variables specified in columns_to_average
-average_data <- mean_std_data %>%
-  group_by(Subject, Activity) %>%
-  summarise(across(all_of(columns_to_average), mean, na.rm = TRUE))
+###### Creating a subset that calculates the mean
+average_data = subset for mean calculation, grouped by Subject and Activity columns
 
