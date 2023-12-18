@@ -17,7 +17,7 @@ y_test <- read.table(file.path(test_path, "y_test.txt"))
 # Reading the features names
 feature_names <- read.table(file.path(feature_names, "features.txt"))[, 2]
 
-# Reading the activity labels file, so I can left join in later for descriptive names to Activity 1-6
+# Reading the activity labels
 activity_names <- read.table(file.path(activity_labels, "activity_labels.txt"), header = FALSE, col.names = c("Activity", "Activity_names"))
 
 # Merging the columns for both datasets
