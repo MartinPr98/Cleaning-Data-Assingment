@@ -37,31 +37,31 @@ test_data <- cbind(subject_test, y_test, x_test)
 ###### Merging the train and test datasets
 merged_data <- rbind(train_data, test_data)
 colnames(merged_data) <- c("Subject", "Activity", feature_names)
-mean_std_data <- merged_data[, grep("mean|std|Subject|Activity", names(merged_data))]
+tidy_data <- merged_data[, grep("mean|std|Subject|Activity", names(merged_data))]
 
-#### When the dataset is created, I use "dplyr" package for renanimg the numbers in column "Activity" with their actual names
-
-###### Replacing numbers with descriptive categories in column "Activity"
-installed.packages("dplyr")
+###### Labeling the data set with descriptive variable names
+names(tidy_data) <- gsub("^t", "Time", names(tidy_data))
+names(tidy_data)<- gsub("^f", "Frequency", names(tidy_data))
+names(tidy_data) <- gsub("Acc", "Accelerometer", names(tidy_data))
+names(tidy_data) <- gsub("Gyro", "Gyroscope", names(tidy_data))
+names(tidy_data)<- gsub("BodyBody", "Body", names(tidy_data))
+names(tidy_data) <- gsub("Mag", "Magnitude", names(tidy_data))
+              
 library(dplyr)
-mean_std_data <- mean_std_data %>%
-  mutate(Activity = case_when(
+tidy_data <- tidy_data %>%
+mutate(Activity = case_when(
     Activity == 1 ~ "WALKING",
     Activity == 2 ~ "WALKING_UPSTAIRS",
     Activity == 3 ~ "WALKING_DOWNSTAIRS",
     Activity == 4 ~ "SITTING",
     Activity == 5 ~ "STANDING",
     Activity == 6 ~ "LAYING")
-  )
+    )
 
-#### Last but not least, is the operation, where I calculate the mean for only specified columns [3:81]
+###### Selecting columns for mean calculation
+columns_to_average <- names(tidy_data)[3:81]
 
-###### Selecting only columns that I want to calculate the mean for
-columns_to_average <- names(mean_std_data)[3:81]
-
-**Last operation is creating a subset of mean_std_data and calculating the mean for specified categories using group_by and summarise**
-
-###### Creating a subset average_data that calculates the mean for variables specified in columns_to_average
-average_data <- mean_std_data %>%
+###### Creating a subset that calculates the mean for specified variables
+final_data <- tidy_data %>%
   group_by(Subject, Activity) %>%
   summarise(across(all_of(columns_to_average), mean, na.rm = TRUE))
