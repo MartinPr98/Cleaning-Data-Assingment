@@ -3,7 +3,6 @@ train_path <- "/home/rstudio/Cleaning Data Assingement/UCI HAR Dataset/train"
 test_path <- "/home/rstudio/Cleaning Data Assingement/UCI HAR Dataset/test"
 feature_names <- "/home/rstudio/Cleaning Data Assingement/UCI HAR Dataset"
 activity_labels <- "/home/rstudio/Cleaning Data Assingement/UCI HAR Dataset"
-
 # Reading the training data
 subject_train <- read.table(file.path(train_path, "subject_train.txt"))
 x_train <- read.table(file.path(train_path, "X_train.txt"))
@@ -31,22 +30,22 @@ tidy_data <- merged_data[, grep("mean|std|Subject|Activity", names(merged_data))
 
 # Labeling the data set with descriptive variable names
 names(tidy_data) <- gsub("^t", "Time", names(tidy_data))
-names(tidy_data)<- gsub("^f", "Frequency", names(tidy_data))
+ names(tidy_data)<- gsub("^f", "Frequency", names(tidy_data))
 names(tidy_data) <- gsub("Acc", "Accelerometer", names(tidy_data))
 names(tidy_data) <- gsub("Gyro", "Gyroscope", names(tidy_data))
 names(tidy_data)<- gsub("BodyBody", "Body", names(tidy_data))
 names(tidy_data) <- gsub("Mag", "Magnitude", names(tidy_data))
-
+              
 library(dplyr)
 tidy_data <- tidy_data %>%
-  mutate(Activity = case_when(
+mutate(Activity = case_when(
     Activity == 1 ~ "WALKING",
     Activity == 2 ~ "WALKING_UPSTAIRS",
     Activity == 3 ~ "WALKING_DOWNSTAIRS",
     Activity == 4 ~ "SITTING",
     Activity == 5 ~ "STANDING",
     Activity == 6 ~ "LAYING")
-  )
+    )
 
 # Selecting columns for mean calculation
 columns_to_average <- names(tidy_data)[3:81]
@@ -58,4 +57,3 @@ final_data <- tidy_data %>%
 
 # Creating text file of final tidy data set
 write.table(final_data, "tidy_data.txt", row.names = FALSE)
-
